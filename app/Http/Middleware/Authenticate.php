@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
 
-
-// Importamos el middleware base de autenticación de Laravel
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 

@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los controladores de la aplicación
 namespace App\Http\Controllers;
 
-
-// Importamos la clase Request de Laravel
 use Illuminate\Http\Request;
 
 

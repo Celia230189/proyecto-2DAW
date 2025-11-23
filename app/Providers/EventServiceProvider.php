@@ -1,16 +1,10 @@
 <?php
 
-
-// Definimos el espacio de nombres para los proveedores de servicios de la aplicación
 namespace App\Providers;
 
-
-// Importamos eventos, listeners y el ServiceProvider base
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
-
 
 // Proveedor de servicios para la gestión de eventos y listeners de la aplicación
 class EventServiceProvider extends ServiceProvider

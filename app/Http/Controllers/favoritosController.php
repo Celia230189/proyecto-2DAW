@@ -1,59 +1,61 @@
 <?php
 
-
-// Definimos el espacio de nombres para los controladores de la aplicación
 namespace App\Http\Controllers;
 
-
-// Importamos el modelo favoritos, la clase Request y el facade DB para consultas directas
 use App\Models\favoritos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
-
-// Controlador encargado de gestionar la funcionalidad de favoritos
 class favoritosController extends Controller
 {
-    // Muestra los productos favoritos del usuario autenticado
+    // Muestra los productos favoritos
     public function mostrarFavoritos()
     {
-        // Consulta los productos favoritos y sus detalles mediante SQL directo
-        $favoritos = DB::select('SELECT favoritos.id, productos.titulo, productos.precio, productos.descripcion, productos.imagen FROM favoritos JOIN productos ON favoritos.id_producto = productos.id JOIN users ON favoritos.id_user= users.id WHERE favoritos.id_user =' . auth()->user()->id . '');
+        // Obtiene el id del usuario actualmente logueado
+        $id_user = Auth::id();
+        
+        // Hacemos un JOIN para traer los datos del producto (título, precio, imagen) usando el id guardado.
+        $favoritos = DB::select('
+            SELECT favoritos.id, productos.titulo, productos.precio, productos.descripcion, productos.imagen 
+            FROM favoritos 
+            JOIN productos ON favoritos.id_producto = productos.id 
+            JOIN users ON favoritos.id_user = users.id 
+            WHERE favoritos.id_user = ?', [$id_user]);
 
-        // Retorna la vista con los datos de favoritos
+        // Envía los datos a la vista 'favoritos.blade.php'  
         return view('favoritos')->with('datosFavoritos', $favoritos);
     }
 
-    // Añade un producto a la lista de favoritos del usuario autenticado
+    // Añade un producto
     public function añadirFavorito(Request $request)
     {
-        $carrito = new favoritos();
+        $favorito = new favoritos();
 
-        // Obtiene el id del producto desde la solicitud y lo asigna
-        $id_producto = $request->id_producto;
-        $carrito->id_producto = $id_producto;
+        $favorito->id_producto = $request->id_producto;
+        $favorito->id_user = Auth::id();
 
-        // Obtiene el id del usuario autenticado y lo asigna
-        $id_user = auth()->user()->id;
-        $carrito->id_user = $id_user;
+        $favorito->save();
 
-        // Guarda el registro en la base de datos
-        $carrito->save();
-
-        // Redirige a la página principal
-        return redirect('/');
+        return back(); 
     }
 
-    // Elimina un producto de la lista de favoritos
+    // Elimina un producto
     public function eliminarFavorito(Request $request)
     {
         $id = (int) $request->input('id_borrar');
 
-        // Busca el producto favorito y lo elimina
+        // Buscamos el favorito
         $articulo = favoritos::find($id);
-        $articulo->delete();
 
-        // Redirige a la vista de favoritos
+        // Verificamos si existe Y si pertenece al usuario conectado.
+        if ($articulo && $articulo->id_user == Auth::id()) {
+            $articulo->delete();
+        } else {
+            // Opcional: Podrías lanzar un error 403 o simplemente ignorarlo
+            return back()->with('error', 'No puedes eliminar este favorito.');
+        }
+
         return redirect('/favoritos');
     }
 }

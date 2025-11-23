@@ -7,18 +7,27 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
-     *
-     * @return void
+     * Ejecuta las migraciones (Crea la tabla).
      */
     public function up()
     {
         Schema::create('compraventas', function (Blueprint $table) {
             $table->id();
-            $table->string('id_user');
+            
+            // Clave Foránea de Usuario.
+            // Conecta con la tabla 'users' para saber quién es el vendedor.
+            $table->foreignId('id_user')
+                  ->constrained('users')
+                  ->onDelete('cascade'); // Si el usuario se borra, se borran sus anuncios de venta.
+            
             $table->string('nombre_producto');
-            $table->string('descripcion_producto');
-            $table->string('precio');
+            
+            // 'text' para descripciones largas.
+            $table->text('descripcion_producto');
+            
+            // 'decimal' para el precio.
+            $table->decimal('precio', 8, 2);
+            
             $table->string('imagen')->default('img/compraventa/default.jpg');
             $table->string('contacto');
             $table->timestamps();
@@ -26,12 +35,11 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
-     *
-     * @return void
+     * Revierte las migraciones (Borra la tabla).
      */
     public function down()
     {
-        //
+        // Rellenamos el método down.
+        Schema::dropIfExists('compraventas');
     }
 };

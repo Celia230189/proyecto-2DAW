@@ -1,13 +1,8 @@
 <?php
 
-
-// Definimos el espacio de nombres para la capa HTTP de la aplicación
 namespace App\Http;
 
-
-// Importamos el Kernel base de Laravel para la gestión de middlewares
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-
 
 // Kernel principal que gestiona los middlewares globales, de grupo y de ruta
 class Kernel extends HttpKernel

@@ -158,7 +158,7 @@ class productoSeeder extends Seeder
                 'genero' => 'masculino',
                 'marca' => 'Levis',
                 'precio' => 90.00,
-                'valoracion' => 8,
+                'valoracion' => 5,
                 'imagen' => 'img/productos/10/cazadora1.jpg',
                 'img2' => 'img/productos/10/cazadora2.jpg',
                 'img3' => 'img/productos/10/cazadora3.jpg',

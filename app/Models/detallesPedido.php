@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los modelos de la aplicación
 namespace App\Models;
 
-
-// Importamos el trait HasFactory y la clase base Model de Eloquent
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

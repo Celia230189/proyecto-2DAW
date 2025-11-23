@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
 
-
-// Importamos el proveedor de rutas, Closure, Request y el facade Auth
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;

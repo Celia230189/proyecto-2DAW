@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('tipo_usuario')->default(0); //0=suscriptor || 1=admin
-            $table->integer('saldo')->default(5000);
+            $table->decimal('saldo')->default(2000);
             $table->rememberToken();
             $table->timestamps();
         });

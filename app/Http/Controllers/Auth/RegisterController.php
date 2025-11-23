@@ -14,8 +14,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-
-// Controlador encargado de gestionar el registro de nuevos usuarios
 class RegisterController extends Controller
 {
     /*
@@ -29,7 +27,6 @@ class RegisterController extends Controller
     |
     */
 
-    // Incluimos el trait que proporciona la funcionalidad de registro de usuarios
     use RegistersUsers;
 
     /**
@@ -47,7 +44,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        // Aplica el middleware para invitados
         $this->middleware('guest');
     }
 
@@ -60,7 +56,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // Valida que el nombre, email y contraseña cumplan los requisitos
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'], // El nombre es obligatorio, tipo string y máximo 255 caracteres
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'], // Email obligatorio, formato válido, único
@@ -77,7 +72,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // Crea y retorna el nuevo usuario
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

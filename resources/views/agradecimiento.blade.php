@@ -3,7 +3,7 @@
 @section('contenido_principal')
 <div style="height: 100px;"></div>
 <div class="container">
-    <h1 class="text-center">PEDEIDO REALIZADO</h1>
+    <h1 class="text-center">PEDIDO REALIZADO</h1>
 
     <h2 class="text-center">GRACIAS POR COMPRAR EN NUESTRA TIENDA :)</h2>
 

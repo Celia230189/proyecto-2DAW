@@ -1,16 +1,10 @@
 <?php
 
-
-// Definimos el espacio de nombres para las excepciones de la aplicación
 namespace App\Exceptions;
 
-
-// Importamos la clase base para el manejo de excepciones y la interfaz Throwable
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
-
-// Clase Handler que gestiona el manejo global de excepciones en la aplicación
 class Handler extends ExceptionHandler
 {
     /**
@@ -20,7 +14,7 @@ class Handler extends ExceptionHandler
      * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
      */
     protected $levels = [
-        // Agrega aquí tipos de excepciones y sus niveles de log si es necesario
+
     ];
 
     /**
@@ -30,7 +24,7 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        // Agrega aquí excepciones que no deseas reportar
+
     ];
 
     /**
@@ -40,9 +34,9 @@ class Handler extends ExceptionHandler
      * @var array<int, string>
      */
     protected $dontFlash = [
-        'current_password', // Contraseña actual
-        'password', // Nueva contraseña
-        'password_confirmation', // Confirmación de contraseña
+        'current_password',
+        'password', 
+        'password_confirmation', 
     ];
 
     /**
@@ -53,9 +47,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        // Callback para manejar el reporte de excepciones personalizadas
         $this->reportable(function (Throwable $e) {
-            // Puedes agregar lógica personalizada para el reporte de excepciones aquí
+
         });
     }
 }

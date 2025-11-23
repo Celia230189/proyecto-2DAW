@@ -1,16 +1,10 @@
 <?php
 
-
-// Definimos el espacio de nombres para los controladores de autenticación
 namespace App\Http\Controllers\Auth;
 
-
-// Importamos el controlador base y el trait para enviar correos de restablecimiento de contraseña
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-
-// Controlador encargado de gestionar el envío de correos para restablecer la contraseña
 class ForgotPasswordController extends Controller
 {
     /*
@@ -24,6 +18,5 @@ class ForgotPasswordController extends Controller
     |
     */
 
-    // Incluimos el trait que proporciona la funcionalidad de envío de correos de restablecimiento
     use SendsPasswordResetEmails;
 }

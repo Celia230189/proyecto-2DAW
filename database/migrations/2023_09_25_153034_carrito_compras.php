@@ -7,28 +7,39 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
-     *
-     * @return void
+     * Ejecuta las migraciones (Crea la tabla).
      */
     public function up()
     {
         Schema::create('carrito_compras', function (Blueprint $table) {
             $table->id();
-            $table->string('id_user');
-            $table->string('id_producto');
-            $table->string('cantidad')->default(1);
+            
+            // Clave Foránea de Usuario.
+            $table->foreignId('id_user')
+                  ->constrained('users')
+                  ->onDelete('cascade'); // Si el usuario se borra, se borra su carrito.
+            
+            // Clave Foránea de Producto.
+            $table->foreignId('id_producto')
+                  ->constrained('productos')
+                  ->onDelete('cascade'); // Si el producto se borra, se elimina del carrito.
+            
+            // Cantidad como 'integer'.
+            $table->integer('cantidad')->default(1);
+            
+            // Añadimos una restricción única: un usuario no puede tener dos filas del mismo producto,
+            $table->unique(['id_user', 'id_producto']);
+            
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
-     *
-     * @return void
+     * Revierte las migraciones (Borra la tabla).
      */
     public function down()
     {
-        //
+        // Rellenamos el método down.
+        Schema::dropIfExists('carrito_compras');
     }
 };

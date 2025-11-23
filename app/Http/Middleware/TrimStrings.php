@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
 
-
-// Importamos el middleware base que recorta los strings de las solicitudes
 use Illuminate\Foundation\Http\Middleware\TrimStrings as Middleware;
 
 
@@ -19,8 +15,8 @@ class TrimStrings extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'current_password', // Contraseña actual
-        'password', // Nueva contraseña
-        'password_confirmation', // Confirmación de contraseña
+        'current_password', 
+        'password', 
+        'password_confirmation', 
     ];
 }

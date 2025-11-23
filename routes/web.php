@@ -55,8 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
     // --- FIN RUTAS CARRITO ---
 
     // --- RUTAS DETALLES PEDIDOS ---
-    Route::get('/pagar/{precioTotal}', [detalles_pedidoController::class, 'mostrarDetallesPago'])->name('pagar');
-    Route::post('/guardarDetallesPedido/{precioTotal}', [detalles_pedidoController::class, 'guardarDetallesPedido'])->name('guardarDetallesPedido');
+    Route::get('/pagar', [detalles_pedidoController::class, 'mostrarDetallesPago'])->name('pagar');
+    Route::post('/guardarDetallesPedido', [detalles_pedidoController::class, 'guardarDetallesPedido'])->name('guardarDetallesPedido');
     // --- FIN RUTAS DETALLES PEDIDOS ---
 
     // --- RUTAS FAVORITOS ---
@@ -73,8 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::POST('/nuevoProdCompraventa', [compraventaController::class, 'nuevoProdCompraventa'])->name('nuevoProdCompraventa');
     Route::post('/productoCompraventa/{id}', [compraventaController::class, 'productoUnicoCompraventa'])->name('productoCompraventa');
     Route::post('/borrarCompraventa/{id}', [compraventaController::class, 'borrarProdCompraventa'])->name('borrarCompraventa');
-    Route::get('/compraventa/editar/{id}', [CompraventaController::class, 'editarProdCompraventa'])->name('editarCompraventa');
-    Route::put('/compraventa/editar/{id}',  [CompraventaController::class, 'actualizarProdCompraventa'])->name('actualizarCompraventa');
+    Route::get('/compraventa/editar/{id}', [compraventaController::class, 'editarProdCompraventa'])->name('editarCompraventa');
+    Route::put('/compraventa/editar/{id}',  [compraventaController::class, 'actualizarProdCompraventa'])->name('actualizarCompraventa');
     });
     // --- FIN RUTAS COMPRAVENTA ---
 });

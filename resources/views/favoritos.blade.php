@@ -4,8 +4,8 @@
     <div class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">COMPRAR</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Encuentra lo que buscas entre una gran cantidad de productos
+                <h1 class="display-4 fw-bolder">TUS FAVORITOS</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Guarda aquí los productos que te gusten para comprar más tarde.
                 </p>
             </div>
         </div>
@@ -13,7 +13,7 @@
 
     <br>
 
-    <!-- Section-->
+    <!-- Sección de listado de productos favoritos-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -28,13 +28,13 @@
                     @foreach ($datosFavoritos as $producto)
                         <div class="col mb-5">
                             <div class="card h-100">
-                                <!-- Product image-->
+                                <!-- Imagen producto-->
                                 <img class="card-img-top" src="{{asset($producto->imagen)}}" alt="..." />
 
-                                <!-- Product details-->
+                                <!-- Detalles producto-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
-                                        <!-- Product name-->
+                                        <!-- Nombre producto-->
                                         <h5 class="fw-bolder">{{ $producto->titulo }}</h5>
                                     </div>
                                     <div class="text-center">

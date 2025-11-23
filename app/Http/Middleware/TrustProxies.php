@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
 
-
-// Importamos el middleware base que gestiona los proxies de confianza y la clase Request
 use Illuminate\Http\Middleware\TrustProxies as Middleware;
 use Illuminate\Http\Request;
 

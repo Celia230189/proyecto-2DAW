@@ -1,21 +1,23 @@
 @extends('index')
 
 @section('contenido_principal')
+{{-- MENÚ DE CATEGORÍAS RÁPIDAS --}}
 <div class="navbar navbar-expand navbar-dark bg-dark">
     <div class="container">
         <ul class="navbar-nav mx-auto">
-            <li class="nav-item ">
-                <a class="nav-link text-danger" href="{{ route('comprar') }}">REBAJAS</a>
-            </li>
+            {{-- ROPA --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('comprarRopa') }}">Ropa</a>
             </li>
+            {{-- CALZADO --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('comprarCalzado') }}">Zapatos</a>
             </li>
+            {{-- COMPLEMENTOS --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('comprarComplementos') }}">Complementos</a>
             </li>
+            {{-- BUSCADOR INLINE --}}
             <div class="container h-100">
                 <div class="d-flex justify-content-center h-100">
                     <div class="searchbar">
@@ -66,6 +68,8 @@
                 </div>
             </div>
         </div>
+
+        {{-- CONTROLES DEL CARRUSEL --}}
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
             data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -78,6 +82,7 @@
         </button>
     </div>
 
+        {{-- SECCIÓN DE CATEGORÍAS DESTACADAS --}}
     <section class="container py-5">
         <div class="row text-center pt-3">
             <div class="col-lg-6 m-auto">
@@ -85,16 +90,21 @@
             </div>
         </div>
         <div class="row">
+            <!--Enlace ropa-->
             <div class="col-12 col-md-4 p-5 mt-3">
                 <img src="{{asset('img/pagina_principal/img_prods/ropa.jpg')}}" class="rounded-circle img-fluid">
                 <h5 class="text-center mt-3 mb-3">Ropa</h5>
                 <p class="text-center"><a href="{{ route('comprarRopa') }}" class="btn btn-primary">Comprar</a></p>
             </div>
+
+            <!--Enlace calzado-->
             <div class="col-12 col-md-4 p-5 mt-3">
                 <img src="{{asset('img/pagina_principal/img_prods/zapatos.jpg')}}" class="rounded-circle img-fluid">
                 <h2 class="h5 text-center mt-3 mb-3">Calzado</h2>
                 <p class="text-center"><a href="{{ route('comprarCalzado') }}" class="btn btn-primary">Comprar</a></p>
             </div>
+
+            <!--Enlace complementos-->
             <div class="col-12 col-md-4 p-5 mt-3">
                 <img src="{{asset('img/pagina_principal/img_prods/complementos.jpg')}}"
                     class="rounded-circle img-fluid">

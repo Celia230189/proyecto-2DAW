@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class compraventaController extends Controller
 {
+    // Mostrar todo (público)
     public function mostrarCompraventa()
     {
         $listaProductos = compraventa::all();
@@ -15,18 +16,21 @@ class compraventaController extends Controller
         return view('compraventa/compraventa', ['datosCompraventa' => $listaProductos]);
     }
 
+    // Mis productos (privado)
     public function mostrarProductosCompraventa()
     {
+        // Filtra por el id del usuario conectado para mostrar sus ventas
         $listaProductos = DB::select('SELECT * FROM compraventas WHERE id_user = ' . auth()->user()->id);
-
         return view('compraventa/compraventa_administrar', ['datosCompraventa' => $listaProductos]);
     }
 
+    // Carga y muestra la vista del formulario
     public function menuNuevoCompraventa()
     {
         return view('compraventa/nuevoProdCompraventa');
     }
 
+    // Creación y guardado con validación
     public function nuevoProdCompraventa(Request $request)
     {
         $request->validate([
@@ -74,6 +78,8 @@ class compraventaController extends Controller
         return view('compraventa/compraventa_administrar', ['datosCompraventa' => $listaProductos]);
     }
 
+    
+    // Editar con seguridad de propiedad
     public function editarProdCompraventa($id)
     {
         $producto = compraventa::findOrFail($id);
@@ -86,6 +92,8 @@ class compraventaController extends Controller
         return view('compraventa/editarProdCompraventa', compact('producto'));
     }
 
+    
+    // Actualizar 
     public function actualizarProdCompraventa(Request $request, $id)
     {
 

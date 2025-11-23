@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
 
-
-// Importamos el middleware base que gestiona el modo mantenimiento de Laravel
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as Middleware;
 
 

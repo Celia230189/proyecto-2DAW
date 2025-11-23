@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los controladores de la aplicación
 namespace App\Http\Controllers;
 
-
-// Importamos el controlador base, el modelo producto y la clase Request
 use App\Http\Controllers\Controller;
 use App\Models\producto;
 use Illuminate\Http\Request;

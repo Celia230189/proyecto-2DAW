@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres de los proveedores de servicios de la aplicación
 namespace App\Providers;
 
-
-// Importamos las clases necesarias para la configuración de rutas y limitación de peticiones
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;

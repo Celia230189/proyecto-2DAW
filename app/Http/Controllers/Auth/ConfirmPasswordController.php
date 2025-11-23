@@ -1,17 +1,11 @@
 <?php
 
-
-// Definimos el espacio de nombres para los controladores de autenticación
 namespace App\Http\Controllers\Auth;
 
-
-// Importamos el controlador base, el proveedor de rutas y el trait para confirmar contraseñas
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 
-
-// Controlador encargado de gestionar la confirmación de contraseñas
 class ConfirmPasswordController extends Controller
 {
     /*
@@ -24,8 +18,6 @@ class ConfirmPasswordController extends Controller
     | explorar y sobreescribir cualquier función si necesitas personalización.
     |
     */
-
-    // Incluimos el trait que proporciona la funcionalidad de confirmación de contraseñas
     use ConfirmsPasswords;
 
     /**
@@ -43,7 +35,6 @@ class ConfirmPasswordController extends Controller
      */
     public function __construct()
     {
-        // Aplica el middleware de autenticación
         $this->middleware('auth');
     }
 }

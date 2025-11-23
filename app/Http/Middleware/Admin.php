@@ -1,9 +1,6 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
-
 
 // Importamos Closure y la clase Request de Laravel
 use Closure;

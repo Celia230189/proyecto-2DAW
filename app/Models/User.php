@@ -1,12 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los modelos de la aplicación
 namespace App\Models;
 
-
-// Importamos interfaces y traits necesarios para el modelo de usuario
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,10 +20,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',         // Nombre del usuario
-        'email',        // Correo electrónico
-        'password',     // Contraseña
-        'tipo_usuario'  // Tipo de usuario (por ejemplo, admin o cliente)
+        'name',         
+        'email',       
+        'password',     
+        'tipo_usuario' 
     ];
 
     /**
@@ -37,16 +32,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',         // Contraseña
-        'remember_token',   // Token de sesión
+        'password',       
+        'remember_token',   
     ];
 
-    /**
-     * Atributos que deben ser convertidos a tipos nativos.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime', // Fecha de verificación de email
-    ];
 }

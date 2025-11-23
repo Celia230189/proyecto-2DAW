@@ -1,60 +1,74 @@
 @extends('index')
 
 @section('contenido_principal')
+
 <style>
-    .imagen {
-        width: 50%;
-    }
+  .imagen-producto {
+    width: 50%;
+  }
 
-    #imagen-td {
-        width: 20%;
-    }
+  #imagen-td {
+    width: 20%;
+  }
 
-    #opciones {
-        padding: 2%;
-        margin-left: 2%;
-    }
+  #opciones {
+    padding: 2%;
+    margin-left: 2%;
+  }
 </style>
 
 <div style="height: 20px;"></div>
 
+{{-- - Botón para añadir un nuevo producto --}}
 <div id="opciones">
-    <a href="{{route('menuNuevo')}}" class="btn btn-success">Añadir  <i class="fa-solid fa-plus"></i></a>
+  <a href="{{route('menuNuevo')}}" class="btn btn-success">Añadir <i class="fa-solid fa-plus"></i></a>
 </div>
 
+{{-- Tabla que lista todos los productos --}}
 <table class="table table-hover text-center">
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Imagen</th>
-      <th scope="col">Titulo</th>
+      <th scope="col">Título</th>
       <th scope="col">Precio</th>
       <th scope="col">Tipo</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($datosProductos as $producto)
-        <tr>
-            <th scope="row">{{$producto->id}}</th>
-            <td id="imagen-td"><img class="card-img-top imagen" src="{{asset($producto->imagen)}}" alt="..."/></td>
-            <td>{{$producto->titulo}}</td>
-            <td>{{$producto->precio}}</td>
-            <td>{{$producto->tipo}}</td>
-            <td>
-                <form action="{{route('menuEditar', $producto->id)}}" method="POST">
-                  {{csrf_field()}}
-                  <button class="btn btn-primary">Editar  <i class="fa-solid fa-pen-to-square"></i></button>
-                </form>
+    @foreach ( $datosProductos as $producto ) {{-- Bucle de laravle para iterar sobre la lista de productos --}}
+      <tr>
+        <th scope="row">{{$producto->id}}</th> {{-- Muestra el id del producto --}}
+          
+        {{-- Columna de la imagen --}}
+        <td id="imagen-td">
+           {{-- La función asset() genera la URL correcta para la ruta pública --}}
+           <img class="card-img-top imagen-producto" src="{{asset($producto->imagen)}}" alt="..."/>
+        </td>
 
-                <form action="{{route('borrar', $producto->id)}}" method="POST">
-                  {{csrf_field()}}
-                  <button class="btn btn-danger">Borrar  <i class="fa-solid fa-trash"></i></button>
-                </form>
-            </td>
-        </tr>
+        <td>{{$producto->titulo}}</td> {{-- Muestra el título --}}
+        <td>{{$producto->precio}}</td> {{-- Muestra el precio --}}
+        <td>{{$producto->tipo}}</td> {{-- Muestra el tipo --}}
+
+        {{-- Columna de Acciones (Editar y Borrar) --}}
+        <td>
+          {{-- Contenedor para alinear los botones verticalmente --}}
+          <div class="d-flex flex-column align-items-center"> 
+             {{-- FORMULARIO DE EDICIÓN --}}
+              <form action="{{route('menuEditar', $producto->id)}}" method="POST" class="mb-2">
+                 @csrf {{-- Token de seguridad CSRF (imprescindible en todos los formularios POST) --}}
+                  <button class="btn btn-primary btn-sm">Editar <i class="fa-solid fa-pen-to-square"></i></button>
+              </form>
+
+              {{-- FORMULARIO DE BORRADO --}}
+              <form action="{{route('borrar', $producto->id)}}" method="POST">
+                @csrf {{-- Token de seguridad CSRF --}}
+                <button class="btn btn-danger btn-sm">Borrar <i class="fa-solid fa-trash"></i></button>
+              </form>
+          </div>
+        </td>
+      </tr>
     @endforeach
   </tbody>
 </table>
-
-@endsection

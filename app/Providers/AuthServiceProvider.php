@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los proveedores de servicios de la aplicación
 namespace App\Providers;
 
-
-// Importamos el proveedor base de autenticación y el facade Gate
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 

@@ -1,17 +1,11 @@
 <?php
 
-
-// Definimos el espacio de nombres para los controladores de autenticación
 namespace App\Http\Controllers\Auth;
 
-
-// Importamos el controlador base, el proveedor de rutas y el trait para restablecimiento de contraseñas
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
-
-// Controlador encargado de gestionar las solicitudes de restablecimiento de contraseña
 class ResetPasswordController extends Controller
 {
     /*
@@ -25,7 +19,6 @@ class ResetPasswordController extends Controller
     |
     */
 
-    // Incluimos el trait que proporciona la funcionalidad de restablecimiento de contraseñas
     use ResetsPasswords;
 
     /**

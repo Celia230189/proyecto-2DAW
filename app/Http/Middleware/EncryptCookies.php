@@ -1,9 +1,6 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
-
 
 // Importamos el middleware base para el cifrado de cookies de Laravel
 use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;

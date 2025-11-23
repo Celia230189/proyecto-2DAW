@@ -1,13 +1,8 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
 
-
-// Importamos el middleware base que verifica el token CSRF de Laravel
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
-
 
 // Middleware encargado de verificar el token CSRF en las solicitudes
 class VerifyCsrfToken extends Middleware

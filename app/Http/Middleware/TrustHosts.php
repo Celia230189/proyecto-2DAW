@@ -1,11 +1,7 @@
 <?php
 
-
-// Definimos el espacio de nombres para los middlewares de la aplicación
 namespace App\Http\Middleware;
 
-
-// Importamos el middleware base que gestiona los hosts de confianza
 use Illuminate\Http\Middleware\TrustHosts as Middleware;
 
 
