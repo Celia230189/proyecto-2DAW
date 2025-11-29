@@ -23,9 +23,18 @@
                                 <p>Saldo: {{ Auth::user()->saldo }} €</p>
                                 <br>
                                 {{-- Botón cerrar sesión --}}
-                                <a class="btn text-white" href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">Cerrar sesion <i
-                                        class="fa-solid fa-right-from-bracket"></i></a>
+                                <form action="{{ route('logout') }}" method="POST" style="display: inline; margin: 0; padding: 0;" id="logout-form">
+                                    @csrf
+                                    <button type="submit" class="btn btn-light" style="cursor: pointer; pointer-events: auto !important; position: relative; z-index: 9999;">
+                                        Cerrar sesión <i class="fa-solid fa-right-from-bracket"></i>
+                                    </button>
+                                </form>
+                                <script>
+                                    console.log('Botón de logout cargado');
+                                    document.getElementById('logout-form').addEventListener('submit', function(e) {
+                                        console.log('Formulario enviado');
+                                    });
+                                </script>
                             </div>
                         </div>
                         {{-- Columna derecha detalles y acciones --}}
@@ -86,13 +95,6 @@
             </div>
         </div>
     </div>
-</div>
-
-<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-    @csrf
-</form>
-
-
 </div>
 
 <div style="height: 50px;"></div>

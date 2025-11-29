@@ -4,11 +4,18 @@
 
 .user-card-full {
     overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-card-full:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 .card {
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    border-radius: 15px;
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     border: none;
     margin-bottom: 30px;
@@ -23,26 +30,43 @@
 }
 
 .user-card-full .user-profile {
-    border-radius: 5px 0 0 5px;
+    border-radius: 15px 0 0 15px;
 }
 
 .bg-c-lite-green {
-    background: -webkit-gradient(
-        linear,
-        left top,
-        right top,
-        from(#3814ff),
-        to(#7375ff)
-    );
-    background: linear-gradient(to right, #3814ff, #7375ff);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-c-lite-green::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    animation: pulse 15s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
 }
 
 .user-profile {
-    padding: 20px 0;
+    padding: 30px 20px;
 }
 
 .card-block {
-    padding: 1.25rem;
+    padding: 2rem;
 }
 
 .m-b-25 {
@@ -50,15 +74,52 @@
 }
 
 .img-radius {
-    border-radius: 5px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    width: 100px;
+    height: 100px;
+}
+
+.img-radius:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.9);
 }
 
 h6 {
     font-size: 14px;
+    color: #333;
+    font-weight: 600;
+}
+
+h5.f-w-600 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-top: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #2c3e50;
 }
 
 .card .card-block p {
-    line-height: 25px;
+    line-height: 28px;
+    color: #555;
+}
+
+.btn.text-white {
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: #2c3e50 !important;
+}
+
+.btn.text-white:hover {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 @media only screen and (min-width: 1400px) {
@@ -67,12 +128,8 @@ h6 {
     }
 }
 
-.card-block {
-    padding: 1.25rem;
-}
-
 .b-b-default {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 2px solid #e8e8e8;
 }
 
 .m-b-20 {
@@ -83,53 +140,75 @@ h6 {
     padding-bottom: 5px !important;
 }
 
-.card .card-block p {
-    line-height: 25px;
-}
-
 .m-b-10 {
     margin-bottom: 10px;
 }
 
 .text-muted {
-    color: #919aa3 !important;
+    color: #666 !important;
+    transition: color 0.3s ease;
 }
 
-.b-b-default {
-    border-bottom: 1px solid #e0e0e0;
+.text-muted:hover {
+    color: #2c3e50 !important;
+}
+
+a.text-muted i {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+a.text-muted:hover i {
+    transform: scale(1.2);
+    color: #2c3e50;
+}
+
+.badge {
+    border-radius: 12px;
+    font-weight: 600;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .f-w-600 {
     font-weight: 600;
 }
 
-.m-b-20 {
-    margin-bottom: 20px;
+.f-w-400 {
+    font-weight: 400;
 }
 
 .m-t-40 {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
-.p-b-5 {
-    padding-bottom: 5px !important;
+.col-sm-6 {
+    margin-bottom: 15px;
 }
 
-.m-b-10 {
-    margin-bottom: 10px;
+.position-relative .badge {
+    position: relative;
+    top: -2px;
 }
 
-.m-t-40 {
-    margin-top: 20px;
-}
-
-.user-card-full .social-link li {
+#administrar a {
     display: inline-block;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-.user-card-full .social-link li a {
-    font-size: 20px;
-    margin: 0 10px 0 0;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+#administrar a:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
 }

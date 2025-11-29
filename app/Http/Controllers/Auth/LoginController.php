@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -28,6 +30,18 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
+     * Obtener el mensaje de error de credenciales fallidas.
+     *
+     * @return string
+     */
+    protected function sendFailedLoginResponse(\Illuminate\Http\Request $request)
+    {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            $this->username() => ['Usuario o contraseña incorrectos.'],
+        ]);
+    }
+
+    /**
      * Crea una nueva instancia del controlador.
      * Aplica el middleware 'guest' para que solo los usuarios no autenticados puedan acceder,
      * excepto para el método 'logout'.
@@ -37,5 +51,22 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Cerrar sesión del usuario.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logout(Request $request)
+    {
+        Auth::guard()->logout();
+        
+        $request->session()->invalidate();
+        
+        $request->session()->regenerateToken();
+        
+        return redirect('/')->with('success', 'Has cerrado sesión correctamente');
     }
 }

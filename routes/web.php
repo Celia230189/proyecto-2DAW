@@ -85,6 +85,7 @@ Route::get('/login', function () {
     return view('login');
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 // --- FIN OTRAS RUTAS ---
 
 Auth::routes();

@@ -2,17 +2,19 @@
 
 @section('contenido_principal')
 {{-- BANNER PRINCIPAL --}}
-<div class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">COMPRAR</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Encuentra lo que buscas entre una gran cantidad de productos
-            </p>
-        </div>
-    </div>
+<div class="position-relative overflow-hidden" style="height: 65vh; min-height: 350px;">
+
+    {{-- Imagen de Fondo (Bannner) --}}
+    <img src="{{asset('img/pagina_principal/banner/playeros.png')}}" class="d-block w-100 h-100" alt="Banner de Compras" style="object-fit: cover; filter: brightness(0.5);">
+
+    {{-- Contenido del Banner --}}
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white w-100">
+        <h1 class="display-4 fw-bolder">{{ $tituloBanner ?? 'COMPRAR' }}</h1>
+        <p class="lead fw-normal mb-0">{{ $descripcionBanner ?? 'Encuentra lo que buscas entre una gran cantidad de productos' }}</p>
+    </div>
 </div>
 
-    <br>
+    <br>
 
 {{-- BOTÓN PARA DESPLEGAR FILTROS --}}
     <a class="btn btn-primary" id="boton_filtros" data-bs-toggle="collapse" href="#filtros" role="button"
@@ -138,45 +140,42 @@
     <!-- ---------FIN FILTROS-------- -->
 
 
-    {{-- SECCIÓN DE LISTADO DE PRODUCTOS --}}
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-4 row-cols-lg-4 row-cols-xl-4 justify-content-center">
-
-                @if(empty($datosProductos))
-                    <div class="alert alert-warning text-center mt-4">
-                        No se han encontrado productos con esos criterios de búsqueda.
-                    </div>
-                @else
-                    @foreach ($datosProductos as $producto)
-                        <div class="col mb-5">
-                            <div class="card h-100">
-                                {{-- Imagen del producto --}}
-                                <img class="card-img-top" src="{{asset($producto->imagen)}}" alt="..." />
-                                
+    {{-- SECCIÓN DE LISTADO DE PRODUCTOS --}}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                @if(empty($datosProductos))
+                    <div class="alert alert-warning text-center mt-4 w-100">
+                        No se han encontrado productos con esos criterios de búsqueda.
+                    </div>
+                @else
+                    @foreach ($datosProductos as $producto)
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                {{-- Imagen del producto --}}
+                                <img class="card-img-top" src="{{asset($producto->imagen)}}" alt="..." />
+                                
                                 {{-- Detalles --}}
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        {{-- Nombre del producto --}}
-                                        <h5 class="fw-bolder">{{$producto->titulo}}</h5>
-                                        {{-- Precio --}}
-                                        {{number_format($producto->precio, 2)}} €
-                                    </div>
-                                </div>
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        {{-- Nombre del producto --}}
+                                        <h5 class="fw-bolder">{{$producto->titulo}}</h5>
+                                        {{-- Precio --}}
+                                        {{number_format($producto->precio, 2)}} €
+                                    </div>
+                                </div>
                                 {{-- Acciones --}}
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                            href="{{route('mostrarProductoUnico', $producto->id)}}">Ver producto</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    </section>
-
-
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                            href="{{route('mostrarProductoUnico', $producto->id)}}">Ver producto</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </section>
     {{-- Archivos JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>

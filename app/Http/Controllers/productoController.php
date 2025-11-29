@@ -54,25 +54,41 @@ class productoController extends Controller
     public function mostrarCalzado()
     {
         $listaProductos = producto::where('tipo', 'calzado')->get();
-        return view('comprar', ['datosProductos' => $listaProductos]);
+        return view('comprar', [
+            'datosProductos' => $listaProductos,
+            'tituloBanner' => 'CALZADO',
+            'descripcionBanner' => 'Encuentra el calzado perfecto para ti'
+        ]);
     }
 
     public function mostrarComplementos()
     {
         $listaProductos = producto::where('tipo', 'complementos')->get();
-        return view('comprar', ['datosProductos' => $listaProductos]);
+        return view('comprar', [
+            'datosProductos' => $listaProductos,
+            'tituloBanner' => 'COMPLEMENTOS',
+            'descripcionBanner' => 'Complementa tu estilo con nuestros accesorios'
+        ]);
     }
 
     public function mostrarHombre()
     {
         $listaProductos = producto::where('genero', 'masculino')->get();
-        return view('comprar', ['datosProductos' => $listaProductos]);
+        return view('comprar', [
+            'datosProductos' => $listaProductos,
+            'tituloBanner' => 'MODA HOMBRE',
+            'descripcionBanner' => 'Descubre la última colección de moda masculina'
+        ]);
     }
 
     public function mostrarMujer()
     {
         $listaProductos = producto::where('genero', 'femenino')->get();
-        return view('comprar', ['datosProductos' => $listaProductos]);
+        return view('comprar', [
+            'datosProductos' => $listaProductos,
+            'tituloBanner' => 'MODA MUJER',
+            'descripcionBanner' => 'Descubre la última colección de moda femenina'
+        ]);
     }
 
     // --- MOSTRAR PRODUCTO ÚNICO ---

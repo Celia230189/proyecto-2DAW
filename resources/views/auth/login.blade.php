@@ -9,6 +9,12 @@
           <div class="card-body p-4 p-sm-5">
             <h5 class="card-title text-center mb-5 fw-light fs-5">Iniciar Sesión</h5>
 
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ $errors->first() }}</strong>
+                </div>
+            @endif
+
             <form method="POST" action="{{ route('login') }}">
             @csrf
 
