@@ -18,9 +18,8 @@
                                 </div>
                                 {{-- Nombre de usuario--}}
                                 <h5 class="f-w-600">{{ Auth::user()->name }}</h5>
-                                <br>
                                 {{-- Accede a la columna saldo de la BD --}}
-                                <p>Saldo: {{ Auth::user()->saldo }} €</p>
+                                <p class="saldo-disponible">Saldo disponible: <strong>{{ Auth::user()->saldo }} €</strong></p>
                                 <br>
                                 {{-- Botón cerrar sesión --}}
                                 <form action="{{ route('logout') }}" method="POST" style="display: inline; margin: 0; padding: 0;" id="logout-form">

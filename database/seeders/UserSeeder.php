@@ -13,8 +13,8 @@ class UserSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@ejemplo.com'],
             [
-                'name' => 'Administrador',
-                'password' => Hash::make(env('ADMIN_PASSWORD', 'CambiarPass123!')),
+                'name' => 'admin',
+                'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
                 'tipo_usuario' => 1, // 1 para admin
                 'saldo' => 0,
             ]

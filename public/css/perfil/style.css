@@ -4,14 +4,16 @@
 
 .user-card-full {
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    border: 1px solid #e0e0e0;
 }
 
 .user-card-full:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 .card {
@@ -34,7 +36,7 @@
 }
 
 .bg-c-lite-green {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
     position: relative;
     overflow: hidden;
 }
@@ -67,6 +69,7 @@
 
 .card-block {
     padding: 2rem;
+    background: #ffffff;
 }
 
 .m-b-25 {
@@ -87,17 +90,19 @@
 }
 
 h6 {
-    font-size: 14px;
-    color: #333;
+    font-size: 15px;
+    color: #495057;
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 h5.f-w-600 {
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-top: 10px;
+    margin-bottom: 15px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: #2c3e50;
+    color: #212529;
 }
 
 .card .card-block p {
@@ -129,7 +134,7 @@ h5.f-w-600 {
 }
 
 .b-b-default {
-    border-bottom: 2px solid #e8e8e8;
+    border-bottom: 2px solid #dee2e6;
 }
 
 .m-b-20 {
@@ -211,4 +216,26 @@ a.text-muted:hover i {
 #administrar a:hover {
     background-color: #f0f0f0;
     transform: translateY(-2px);
+}
+
+.saldo-disponible {
+    font-size: 1rem;
+    color: #495057;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin: 0 auto 20px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.saldo-disponible strong {
+    color: #212529;
+    font-size: 1.1rem;
+}
+
+.saldo-disponible:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
