@@ -2,7 +2,7 @@
 
 @section('contenido_principal')
 {{-- BANNER PRINCIPAL --}}
-<div class="position-relative overflow-hidden" style="height: 65vh; min-height: 350px;">
+<div class="position-relative overflow-hidden" style="height: 40vh; min-height: 250px;">
 
     {{-- Imagen de Fondo (Bannner) --}}
     <img src="{{asset('img/pagina_principal/banner/playeros.png')}}" class="d-block w-100 h-100" alt="Banner de Compras" style="object-fit: cover; filter: brightness(0.5);">

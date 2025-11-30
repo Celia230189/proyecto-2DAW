@@ -15,21 +15,18 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{asset('img/pagina_principal/banner/bañadores.jpg')}}" class="d-block w-100" alt="...">
+                <img src="{{asset('img/pagina_principal/banner/banner_bañadores2.jpg')}}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block text-black">
-                    <h5>Colección de Verano 2025</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{asset('img/pagina_principal/banner/sudaderas.jpg')}}" class="d-block w-100" alt="...">
+                <img src="{{asset('img/pagina_principal/banner/banner_zapatillas.jpg')}}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block text-black">
-                    <h5>Sudaderas con capucha</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{asset('img/pagina_principal/banner/playeros.png')}}" class="d-block w-100" alt="...">
+                <img src="{{asset('img/pagina_principal/banner/banner_adidas.jpg')}}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Zapatillas deportivas</h5>
                 </div>
             </div>
         </div>
