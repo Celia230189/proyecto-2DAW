@@ -27,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Forzar HTTPS en producción
+        if (config('app.env') === 'production') {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         // Compartir contadores de carrito y favoritos en TODAS las vistas ('*')
         View::composer('*', function ($view) {
             $carritoCount = 0;
