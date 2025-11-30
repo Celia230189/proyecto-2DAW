@@ -14,11 +14,11 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     
     {{-- Archivos CSS y JS locales (con asset() para la URL pública) --}}
-    <script type="text/javascript" src="{{ asset('js/filtros/js.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/filtros/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/perfil/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detalles_pedidos/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/pagina_principal/style.css') }}">
+    <script type="text/javascript" src="{{ asset('js/filtros/js.js') }}?v={{ time() }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/filtros/style.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/perfil/style.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/detalles_pedidos/style.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/pagina_principal/style.css') }}?v={{ time() }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
