@@ -51,6 +51,18 @@ Route::get('/test-db', function () {
     }
 });
 
+// Ruta para verificar assets
+Route::get('/test-assets', function () {
+    $info = [
+        'APP_URL' => config('app.url'),
+        'asset() perfil CSS' => asset('css/perfil/style.css'),
+        'file exists' => file_exists(public_path('css/perfil/style.css')) ? 'YES' : 'NO',
+        'public_path' => public_path(),
+        'base_path' => base_path(),
+    ];
+    return '<pre>' . print_r($info, true) . '</pre>';
+});
+
 // --- RUTAS COMPRAR ---
 Route::get('/comprar', [productoController::class, 'mostrarProductos'])->name('comprar');
 Route::get('/comprarRopa', [productoController::class, 'mostrarRopa'])->name('comprarRopa');
