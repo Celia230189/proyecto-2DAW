@@ -24,6 +24,19 @@ Route::get('/', function () {
     return view('principal');
 })->name('principal');
 
+// Ruta temporal para ejecutar migraciones (ELIMINAR DESPUÉS)
+Route::get('/run-migrations', function () {
+    if (app()->environment('production')) {
+        try {
+            \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+            return 'Migraciones ejecutadas correctamente: ' . \Illuminate\Support\Facades\Artisan::output();
+        } catch (\Exception $e) {
+            return 'Error: ' . $e->getMessage();
+        }
+    }
+    return 'Solo disponible en producción';
+});
+
 // --- RUTAS COMPRAR ---
 Route::get('/comprar', [productoController::class, 'mostrarProductos'])->name('comprar');
 Route::get('/comprarRopa', [productoController::class, 'mostrarRopa'])->name('comprarRopa');
