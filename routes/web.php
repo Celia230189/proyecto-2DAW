@@ -26,15 +26,29 @@ Route::get('/', function () {
 
 // Ruta temporal para ejecutar migraciones (ELIMINAR DESPUÉS)
 Route::get('/run-migrations', function () {
-    if (app()->environment('production')) {
-        try {
-            \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-            return 'Migraciones ejecutadas correctamente: ' . \Illuminate\Support\Facades\Artisan::output();
-        } catch (\Exception $e) {
-            return 'Error: ' . $e->getMessage();
-        }
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        return '<pre>Migraciones ejecutadas correctamente: ' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
+    } catch (\Exception $e) {
+        return '<pre>Error: ' . $e->getMessage() . "\n\nStack trace:\n" . $e->getTraceAsString() . '</pre>';
     }
-    return 'Solo disponible en producción';
+});
+
+// Ruta para ver configuración de DB
+Route::get('/test-db', function () {
+    try {
+        $config = [
+            'DB_CONNECTION' => config('database.default'),
+            'DB_HOST' => config('database.connections.mysql.host'),
+            'DB_PORT' => config('database.connections.mysql.port'),
+            'DB_DATABASE' => config('database.connections.mysql.database'),
+            'DB_USERNAME' => config('database.connections.mysql.username'),
+            'DB_PASSWORD' => config('database.connections.mysql.password') ? '***SET***' : 'NOT SET',
+        ];
+        return '<pre>' . print_r($config, true) . '</pre>';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
 });
 
 // --- RUTAS COMPRAR ---
