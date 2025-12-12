@@ -40,36 +40,4 @@ class producto extends Model
         return $this->hasMany(favoritos::class, 'id_producto');
     }
 
-    // 4. ACCESSORS - Asegura que las rutas de las imágenes siempre tengan el formato correcto
-    public function getImagenAttribute($value)
-    {
-        if (empty($value)) {
-            return 'img/productos/default.jpg';
-        }
-        return ltrim($value, '/');
-    }
-
-    public function getImg2Attribute($value)
-    {
-        if (empty($value)) {
-            return 'img/productos/default.jpg';
-        }
-        return ltrim($value, '/');
-    }
-
-    public function getImg3Attribute($value)
-    {
-        if (empty($value)) {
-            return 'img/productos/default.jpg';
-        }
-        return ltrim($value, '/');
-    }
-
-    public function getImg4Attribute($value)
-    {
-        if (empty($value)) {
-            return 'img/productos/default.jpg';
-        }
-        return ltrim($value, '/');
-    }
 }

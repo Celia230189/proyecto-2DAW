@@ -61,7 +61,7 @@
                     <td>
                         <div class="d-flex flex-column align-items-center gap-2">
                             {{-- Botón Editar --}}
-                            <a href="{{ route('editarProdCompraventa', $producto->id) }}" class="btn btn-primary btn-sm">
+                            <a href="{{ route('editarCompraventa', $producto->id) }}" class="btn btn-primary btn-sm">
                                 Editar <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             
