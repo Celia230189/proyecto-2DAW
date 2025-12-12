@@ -31,4 +31,16 @@ class compraventa extends Model
         // 'id_user' es la columna que conecta con la tabla users
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    // 4. ACCESSORS - Asegura que la ruta de la imagen siempre tenga el formato correcto
+    public function getImagenAttribute($value)
+    {
+        // Si la imagen está vacía o es null, devuelve la imagen por defecto
+        if (empty($value)) {
+            return 'img/compraventa/default.jpg';
+        }
+        
+        // Si la ruta comienza con '/', la quitamos para que funcione con asset()
+        return ltrim($value, '/');
+    }
 }
