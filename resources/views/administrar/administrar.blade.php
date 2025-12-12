@@ -19,6 +19,21 @@
 
 <div style="height: 20px;"></div>
 
+{{-- Mensajes de éxito o error --}}
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show mx-3" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show mx-3" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 {{-- - Botón para añadir un nuevo producto --}}
 <div id="opciones">
   <a href="{{route('menuNuevo')}}" class="btn btn-success">Añadir <i class="fa-solid fa-plus"></i></a>
@@ -62,9 +77,9 @@
               </form>
 
               {{-- FORMULARIO DE BORRADO --}}
-              <form action="{{route('borrar', $producto->id)}}" method="POST">
+              <form action="{{route('borrar', $producto->id)}}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
                 @csrf {{-- Token de seguridad CSRF --}}
-                <button class="btn btn-danger btn-sm">Borrar <i class="fa-solid fa-trash"></i></button>
+                <button type="submit" class="btn btn-danger btn-sm">Borrar <i class="fa-solid fa-trash"></i></button>
               </form>
           </div>
         </td>

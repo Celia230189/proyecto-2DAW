@@ -51,7 +51,8 @@ class compraventaController extends Controller
 
         if ($request->hasFile('nueva_imagen')) {
             $file = $request->file("nueva_imagen");
-            $nombre = bin2hex(random_bytes(5)) . "." . $file->guessExtension();
+            $extension = $file->getClientOriginalExtension();
+            $nombre = bin2hex(random_bytes(5)) . "." . $extension;
             $ruta = "img/compraventa/" . $nombre;
             $destino = public_path("img/compraventa");
 
@@ -122,7 +123,8 @@ class compraventaController extends Controller
         // Imagen nueva si la hay
         if ($request->hasFile('nueva_imagen')) {
             $file = $request->file("nueva_imagen");
-            $nombre = bin2hex(random_bytes(5)) . "." . $file->guessExtension();
+            $extension = $file->getClientOriginalExtension();
+            $nombre = bin2hex(random_bytes(5)) . "." . $extension;
             $ruta = "img/compraventa/" . $nombre;
             $destino = public_path("img/compraventa");
 
@@ -156,10 +158,27 @@ class compraventaController extends Controller
     public function borrarProdCompraventa($id)
     {
         $producto = compraventa::find($id);
+        
+        if (!$producto) {
+            return redirect()->route('compraventa_administrar')->with('error', 'Producto no encontrado');
+        }
+
+        // Comprobamos que el producto pertenece al usuario
+        if ($producto->id_user != auth()->user()->id) {
+            abort(403, 'No tienes permiso para eliminar este producto');
+        }
+
+        // Elimina la imagen física si existe y no es predeterminada
+        if ($producto->imagen && $producto->imagen != 'img/compraventa/default.jpg') {
+            $ruta_img = public_path($producto->imagen);
+            if (file_exists($ruta_img)) {
+                @unlink($ruta_img);
+            }
+        }
+
+        // Ahora sí borra el registro de la base de datos
         $producto->delete();
 
-        $listaProductos = DB::select('SELECT * FROM compraventas WHERE id_user = ' . auth()->user()->id);
-
-        return view('compraventa/compraventa_administrar', ['datosCompraventa' => $listaProductos]);
+        return redirect()->route('compraventa_administrar')->with('success', 'Producto eliminado correctamente');
     }
 }

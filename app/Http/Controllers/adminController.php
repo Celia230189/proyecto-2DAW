@@ -58,11 +58,78 @@ class adminController extends Controller
         $valoracion = $request->valoracion;
         $producto->valoracion = $valoracion;
 
-        // Guarda el producto en la base de datos
+        // Guarda el producto primero para obtener el ID
+        $producto->save();
+
+        // Procesa las imágenes después de guardar para tener el ID del producto
+        $id = $producto->id;
+
+        // Imagen principal
+        if ($request->hasFile('nueva_imagen')) {
+            $file = $request->file("nueva_imagen");
+            $extension = $file->getClientOriginalExtension();
+            $nombre = bin2hex(random_bytes(5)) . "." . $extension;
+            $ruta = "img/productos/" . $id . "/" . $nombre;
+            $destino = public_path("img/productos/" . $id);
+
+            // Crea el directorio si no existe
+            if (!file_exists($destino)) {
+                mkdir($destino, 0755, true);
+            }
+            $file->move($destino, $nombre);
+            $producto->imagen = $ruta;
+        }
+
+        // Imagen secundaria 2
+        if ($request->hasFile('img2')) {
+            $file2 = $request->file("img2");
+            $extension2 = $file2->getClientOriginalExtension();
+            $nombre2 = bin2hex(random_bytes(5)) . "." . $extension2;
+            $ruta2 = "img/productos/" . $id . "/" . $nombre2;
+            $destino2 = public_path("img/productos/" . $id);
+
+            if (!file_exists($destino2)) {
+                mkdir($destino2, 0755, true);
+            }
+            $file2->move($destino2, $nombre2);
+            $producto->img2 = $ruta2;
+        }
+
+        // Imagen secundaria 3
+        if ($request->hasFile('img3')) {
+            $file3 = $request->file("img3");
+            $extension3 = $file3->getClientOriginalExtension();
+            $nombre3 = bin2hex(random_bytes(5)) . "." . $extension3;
+            $ruta3 = "img/productos/" . $id . "/" . $nombre3;
+            $destino3 = public_path("img/productos/" . $id);
+
+            if (!file_exists($destino3)) {
+                mkdir($destino3, 0755, true);
+            }
+            $file3->move($destino3, $nombre3);
+            $producto->img3 = $ruta3;
+        }
+
+        // Imagen secundaria 4
+        if ($request->hasFile('img4')) {
+            $file4 = $request->file("img4");
+            $extension4 = $file4->getClientOriginalExtension();
+            $nombre4 = bin2hex(random_bytes(5)) . "." . $extension4;
+            $ruta4 = "img/productos/" . $id . "/" . $nombre4;
+            $destino4 = public_path("img/productos/" . $id);
+
+            if (!file_exists($destino4)) {
+                mkdir($destino4, 0755, true);
+            }
+            $file4->move($destino4, $nombre4);
+            $producto->img4 = $ruta4;
+        }
+
+        // Guarda las rutas de las imágenes
         $producto->save();
 
         // Redirige a la vista de administración
-        return redirect('/administrar');
+        return redirect('/administrar')->with('success', 'Producto creado correctamente');
     }
     // ----- FIN AÑADIR PRODUCTO -----
 
@@ -71,34 +138,48 @@ class adminController extends Controller
     public function borrar($id)
     {
         $producto = producto::find($id);
+        
+        if (!$producto) {
+            return redirect('/administrar')->with('error', 'Producto no encontrado');
+        }
+
+        // Elimina la imagen principal si existe y no es la predeterminada
+        if ($producto->imagen && $producto->imagen != 'img/productos/default.jpg') {
+            $ruta_img = public_path($producto->imagen);
+            if (file_exists($ruta_img)) {
+                @unlink($ruta_img);
+            }
+        }
+
+        // Elimina la imagen secundaria 2 si existe y no es la predeterminada
+        if ($producto->img2 && $producto->img2 != 'img/productos/default.jpg') {
+            $ruta_img2 = public_path($producto->img2);
+            if (file_exists($ruta_img2)) {
+                @unlink($ruta_img2);
+            }
+        }
+
+        // Elimina la imagen secundaria 3 si existe y no es la predeterminada
+        if ($producto->img3 && $producto->img3 != 'img/productos/default.jpg') {
+            $ruta_img3 = public_path($producto->img3);
+            if (file_exists($ruta_img3)) {
+                @unlink($ruta_img3);
+            }
+        }
+
+        // Elimina la imagen secundaria 4 si existe y no es la predeterminada
+        if ($producto->img4 && $producto->img4 != 'img/productos/default.jpg') {
+            $ruta_img4 = public_path($producto->img4);
+            if (file_exists($ruta_img4)) {
+                @unlink($ruta_img4);
+            }
+        }
+
+        // Ahora sí borra el registro de la base de datos
         $producto->delete();
 
-        // Elimina la imagen principal si existe
-        $ruta_img = public_path($producto->imagen);
-        if ($ruta_img) {
-            unlink($ruta_img);
-        }
-
-        // Elimina la imagen secundaria 2 si existe
-        $ruta_img2 = public_path($producto->img2);
-        if ($ruta_img2) {
-            unlink($ruta_img2);
-        }
-
-        // Elimina la imagen secundaria 3 si existe
-        $ruta_img3 = public_path($producto->img3);
-        if ($ruta_img3) {
-            unlink($ruta_img3);
-        }
-
-        // Elimina la imagen secundaria 4 si existe
-        $ruta_img4 = public_path($producto->img4);
-        if ($ruta_img4) {
-            unlink($ruta_img4);
-        }
-
         // Redirige a la vista de administración
-        return redirect('/administrar');
+        return redirect('/administrar')->with('success', 'Producto eliminado correctamente');
     }
     // ----- FIN BORRAR PRODUCTO -----
 
@@ -140,7 +221,8 @@ class adminController extends Controller
         // Imagen principal
         if ($request->hasFile('nueva_imagen')) {
             $file = $request->file("nueva_imagen");
-            $nombre = bin2hex(random_bytes(5)) . "." . $file->guessExtension();
+            $extension = $file->getClientOriginalExtension();
+            $nombre = bin2hex(random_bytes(5)) . "." . $extension;
             $ruta = "img/productos/" . $id . "/" . $nombre;
             $destino = public_path("img/productos/" . $id);
 
@@ -163,7 +245,8 @@ class adminController extends Controller
         // Imagen secundaria 2
         if ($request->hasFile('img2')) {
             $file2 = $request->file("img2");
-            $nombre2 = bin2hex(random_bytes(5)) . "." . $file2->guessExtension();
+            $extension2 = $file2->getClientOriginalExtension();
+            $nombre2 = bin2hex(random_bytes(5)) . "." . $extension2;
             $ruta2 = "img/productos/" . $id . "/" . $nombre2;
             $destino2 = public_path("img/productos/" . $id);
 
@@ -184,7 +267,8 @@ class adminController extends Controller
         // Imagen secundaria 3
         if ($request->hasFile('img3')) {
             $file3 = $request->file("img3");
-            $nombre3 = bin2hex(random_bytes(5)) . "." . $file3->guessExtension();
+            $extension3 = $file3->getClientOriginalExtension();
+            $nombre3 = bin2hex(random_bytes(5)) . "." . $extension3;
             $ruta3 = "img/productos/" . $id . "/" . $nombre3;
             $destino3 = public_path("img/productos/" . $id);
 
@@ -205,7 +289,8 @@ class adminController extends Controller
         // Imagen secundaria 4
         if ($request->hasFile('img4')) {
             $file4 = $request->file("img4");
-            $nombre4 = bin2hex(random_bytes(5)) . "." . $file4->guessExtension();
+            $extension4 = $file4->getClientOriginalExtension();
+            $nombre4 = bin2hex(random_bytes(5)) . "." . $extension4;
             $ruta4 = "img/productos/" . $id . "/" . $nombre4;
             $destino4 = public_path("img/productos/" . $id);
 
