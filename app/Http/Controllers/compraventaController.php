@@ -20,7 +20,7 @@ class compraventaController extends Controller
     public function mostrarProductosCompraventa()
     {
         // Filtra por el id del usuario conectado para mostrar sus ventas
-        $listaProductos = DB::select('SELECT * FROM compraventas WHERE id_user = ' . auth()->user()->id);
+        $listaProductos = compraventa::where('id_user', auth()->user()->id)->get();
         return view('compraventa/compraventa_administrar', ['datosCompraventa' => $listaProductos]);
     }
 
@@ -78,9 +78,7 @@ class compraventaController extends Controller
 
         $producto_compraventa->save();
 
-        $listaProductos = DB::select('SELECT * FROM compraventas WHERE id_user = ' . auth()->user()->id);
-
-        return view('compraventa/compraventa_administrar', ['datosCompraventa' => $listaProductos]);
+        return redirect()->route('compraventa_administrar')->with('success', 'Producto creado correctamente');
     }
 
     
