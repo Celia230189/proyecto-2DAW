@@ -53,9 +53,13 @@ class compraventaController extends Controller
             $file = $request->file("nueva_imagen");
             $nombre = bin2hex(random_bytes(5)) . "." . $file->guessExtension();
             $ruta = "img/compraventa/" . $nombre;
-            $destino = public_path($ruta);
+            $destino = public_path("img/compraventa");
 
-            copy($file, $destino);
+            // Crea el directorio si no existe
+            if (!file_exists($destino)) {
+                mkdir($destino, 0755, true);
+            }
+            $file->move($destino, $nombre);
             $producto_compraventa->imagen = $ruta;
         }
 
@@ -120,9 +124,13 @@ class compraventaController extends Controller
             $file = $request->file("nueva_imagen");
             $nombre = bin2hex(random_bytes(5)) . "." . $file->guessExtension();
             $ruta = "img/compraventa/" . $nombre;
-            $destino = public_path($ruta);
+            $destino = public_path("img/compraventa");
 
-            copy($file, $destino);
+            // Crea el directorio si no existe
+            if (!file_exists($destino)) {
+                mkdir($destino, 0755, true);
+            }
+            $file->move($destino, $nombre);
             $producto->imagen = $ruta;
         }
 

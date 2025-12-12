@@ -142,18 +142,21 @@ class adminController extends Controller
             $file = $request->file("nueva_imagen");
             $nombre = bin2hex(random_bytes(5)) . "." . $file->guessExtension();
             $ruta = "img/productos/" . $id . "/" . $nombre;
-            $destino = public_path($ruta);
+            $destino = public_path("img/productos/" . $id);
 
             // Si la imagen anterior no es la predeterminada, la elimina
             if ($producto->imagen != 'img/productos/default.jpg') {
                 $ruta_img = public_path($producto->imagen);
-                if ($ruta_img) {
+                if (file_exists($ruta_img)) {
                     unlink($ruta_img);
                 }
             }
 
-            // Copia la nueva imagen al destino y actualiza la ruta
-            copy($file, $destino);
+            // Crea el directorio si no existe y mueve la imagen
+            if (!file_exists($destino)) {
+                mkdir($destino, 0755, true);
+            }
+            $file->move($destino, $nombre);
             $producto->imagen = $ruta;
         }
 
@@ -162,16 +165,19 @@ class adminController extends Controller
             $file2 = $request->file("img2");
             $nombre2 = bin2hex(random_bytes(5)) . "." . $file2->guessExtension();
             $ruta2 = "img/productos/" . $id . "/" . $nombre2;
-            $destino2 = public_path($ruta2);
+            $destino2 = public_path("img/productos/" . $id);
 
             if ($producto->img2 != 'img/productos/default.jpg') {
                 $ruta_img2 = public_path($producto->img2);
-                if ($ruta_img2) {
+                if (file_exists($ruta_img2)) {
                     unlink($ruta_img2);
                 }
             }
 
-            copy($file2, $destino2);
+            if (!file_exists($destino2)) {
+                mkdir($destino2, 0755, true);
+            }
+            $file2->move($destino2, $nombre2);
             $producto->img2 = $ruta2;
         }
 
@@ -180,16 +186,19 @@ class adminController extends Controller
             $file3 = $request->file("img3");
             $nombre3 = bin2hex(random_bytes(5)) . "." . $file3->guessExtension();
             $ruta3 = "img/productos/" . $id . "/" . $nombre3;
-            $destino3 = public_path($ruta3);
+            $destino3 = public_path("img/productos/" . $id);
 
             if ($producto->img3 != 'img/productos/default.jpg') {
                 $ruta_img3 = public_path($producto->img3);
-                if ($ruta_img3) {
+                if (file_exists($ruta_img3)) {
                     unlink($ruta_img3);
                 }
             }
 
-            copy($file3, $destino3);
+            if (!file_exists($destino3)) {
+                mkdir($destino3, 0755, true);
+            }
+            $file3->move($destino3, $nombre3);
             $producto->img3 = $ruta3;
         }
 
@@ -198,16 +207,19 @@ class adminController extends Controller
             $file4 = $request->file("img4");
             $nombre4 = bin2hex(random_bytes(5)) . "." . $file4->guessExtension();
             $ruta4 = "img/productos/" . $id . "/" . $nombre4;
-            $destino4 = public_path($ruta4);
+            $destino4 = public_path("img/productos/" . $id);
 
             if ($producto->img4 != 'img/productos/default.jpg') {
                 $ruta_img4 = public_path($producto->img4);
-                if ($ruta_img4) {
+                if (file_exists($ruta_img4)) {
                     unlink($ruta_img4);
                 }
             }
 
-            copy($file4, $destino4);
+            if (!file_exists($destino4)) {
+                mkdir($destino4, 0755, true);
+            }
+            $file4->move($destino4, $nombre4);
             $producto->img4 = $ruta4;
         }
 
